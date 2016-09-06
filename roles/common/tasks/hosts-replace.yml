@@ -1,0 +1,7 @@
+- name: set /etc/hosts(frontend-local)
+  template: src=hosts-frontend-local.j2 dest=/etc/hosts owner=root group=root mode=0644
+  when: stage in ['frontend-local']
+
+- name: set /etc/hosts(backend-local)
+  template: src=hosts-backend-local.j2 dest=/etc/hosts owner=root group=root mode=0644
+  when: stage in ['backend-local']

@@ -1,0 +1,37 @@
+- name: add nginx official repository
+  yum: name=http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+
+- name: yum update
+  yum: name=nginx-release-centos state=latest
+
+- name: install nginx
+  yum: name=nginx enablerepo=nginx state=latest
+
+- name: set ssl crt(local)
+  template: src=domainname.crt.j2 dest=/etc/pki/tls/certs/domainname.crt owner=root group=root mode=0644
+  when: stage in ['frontend-local', 'backend-local']
+
+- name: set ssl privateKey(local)
+  template: src=domainname.key.j2 dest=/etc/pki/tls/private/domainname.key owner=root group=root mode=0644
+  when: stage in ['frontend-local', 'backend-local']
+
+- name: set laravel-front.net VirtualHost conf(local)
+  template: src=laravel-front.conf.j2 dest=/etc/nginx/conf.d/laravel-front.conf owner=root group=root mode=0600
+  when: stage == 'frontend-local'
+
+- name: set dev.laravel-api.net VirtualHost conf(local)
+  template: src=laravel-api.conf.j2 dest=/etc/nginx/conf.d/laravel-api.conf owner=root group=root mode=0600
+  when: stage == 'backend-local'
+
+- name: change vagrant home dir Permission
+  file: path=/home/vagrant/ owner=vagrant group=vagrant mode=755 recurse=yes state=directory
+  when: stage in ['frontend-local', 'backend-local']
+
+- name: set php-fpm www.conf
+  template: src=www.conf.j2 dest=/etc/php-fpm.d/www.conf owner=root group=root mode=0600
+
+- name : start nginx
+  service: name=nginx state=restarted enabled=yes
+
+- name : start php-fpm
+  service: name=php-fpm state=restarted enabled=yes

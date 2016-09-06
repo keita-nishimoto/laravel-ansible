@@ -1,0 +1,6 @@
+nodebrew_install_home_dir : /home/vagrant/
+nodebrew_install_user : vagrant
+document_root: /home/vagrant/laravel-front-sample/public
+domain_name: dev.laravel-front.net
+ssl_certificate_path: /etc/pki/tls/certs/domainname.crt
+ssl_certificate_key_path: /etc/pki/tls/private/domainname.key

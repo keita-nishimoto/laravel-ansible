@@ -1,0 +1,17 @@
+- name: install php7
+  yum : name={{item}} enablerepo=remi,remi-php70,epel state=present
+  with_items:
+    - php
+    - php-devel
+    - php-opcache
+    - php-mbstring
+    - php-pecl-redis
+    - php-mcrypt
+    - php-pdo
+    - php-mysqlnd
+    - php-pecl-xdebug
+    - php-fpm
+    - php-xml
+
+- name: replace php.ini
+  template: src=php.ini.j2 dest=/etc/php.ini owner=root group=root mode=0644

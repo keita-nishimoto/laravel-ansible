@@ -1,0 +1,2 @@
+- name: Install Official MySQL5.7 Repository
+  yum: name=http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm

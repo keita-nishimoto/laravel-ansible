@@ -1,0 +1,6 @@
+# IntelliJ IDEA SettingFiles
+.idea/
+laravel-ansible.iml
+
+# ansible
+site.retry

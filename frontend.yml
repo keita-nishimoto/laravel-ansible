@@ -1,0 +1,11 @@
+- hosts: frontend
+  become: yes
+  vars_files:
+      - vars/{{ stage }}.yml
+  roles:
+    - common
+    - nodebrew
+    - node
+    - php
+    - nginx
+    - composer

@@ -1,0 +1,3 @@
+- include: frontend.yml
+- include: backend.yml
+- include: db-master.yml

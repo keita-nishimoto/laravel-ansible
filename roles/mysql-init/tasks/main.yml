@@ -1,0 +1,40 @@
+# これらのタスクはセキュリティ的に十分ではないのでローカル開発環境でだけ実行する
+- name: install MySQL-python for ansible mysql_user module
+  yum: name=MySQL-python state=installed
+  when: stage == 'db-master-local'
+
+- name: save-mysql-tmp-password.sh
+  script: save-mysql-tmp-password.sh creates=/root/.tmp.my.cnf
+  when: stage == 'db-master-local'
+
+- name: set new password
+  script: change-root-password.sh creates=/root/.my.cnf
+  when: stage == 'db-master-local'
+
+- name: create database laravel_api
+  mysql_db:
+    name: laravel_api
+    state: present
+  when: stage == 'db-master-local'
+
+- name: create database laravel_api_test
+  mysql_db:
+    name: laravel_api_test
+    state: present
+  when: stage == 'db-master-local'
+
+- name: create laravel_api user
+  mysql_user: name=laravel_api host={{ item }} password={{ mysql_db_password }} priv=laravel_api.*:ALL state=present
+  with_items:
+    - 127.0.0.1
+    - localhost
+    - 192.168.%
+  when: stage == 'db-master-local'
+
+- name: create laravel_api_test user
+  mysql_user: name=laravel_api_test host={{ item }} password={{ mysql_db_password }} priv=laravel_api_test.*:ALL state=present
+  with_items:
+    - 127.0.0.1
+    - localhost
+    - 192.168.%
+  when: stage == 'db-master-local'

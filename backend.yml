@@ -1,0 +1,11 @@
+- hosts: backend
+  become: yes
+  vars_files:
+      - vars/{{ stage }}.yml
+  roles:
+    - common
+    - mysql
+    - mysql-client
+    - php
+    - nginx
+    - composer

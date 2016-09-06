@@ -1,0 +1,7 @@
+- include: set-timezone.yml
+- include: set-locale.yml
+- include: add-yum-repos.yml
+- include: os-update.yml
+- include: selinux.yml
+- include: command.yml
+- include: hosts-replace.yml

@@ -1,0 +1,4 @@
+document_root: /home/vagrant/laravel-api-sample/public
+domain_name: dev.laravel-api.net
+ssl_certificate_path: /etc/pki/tls/certs/domainname.crt
+ssl_certificate_key_path: /etc/pki/tls/private/domainname.key

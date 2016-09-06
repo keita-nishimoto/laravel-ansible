@@ -1,0 +1,5 @@
+[db-master]
+192.168.33.22
+
+[all:vars]
+stage=db-master-local
