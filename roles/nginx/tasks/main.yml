@@ -23,9 +23,18 @@
   template: src=laravel-api.conf.j2 dest=/etc/nginx/conf.d/laravel-api.conf owner=root group=root mode=0600
   when: stage == 'backend-local'
 
-- name: change vagrant home dir Permission
-  file: path=/home/vagrant/ owner=vagrant group=vagrant mode=755 recurse=yes state=directory
+# コードカバレッジ閲覧用のディレクトリを作成する
+- name: make laravel-api-sample codeCoverage directory
+  file: path=/usr/share/nginx/coverage state=directory owner=root group=root mode=0777
   when: stage in ['frontend-local', 'backend-local']
+
+- name: set coverage.laravel-api.net VirtualHost conf
+  template: src=coverage-api.conf.j2 dest=/etc/nginx/conf.d/coverage-api.conf owner=root group=root mode=0600
+  when: stage in ['backend-local']
+
+#- name: change vagrant home dir Permission
+#  file: path=/home/vagrant/ owner=vagrant group=vagrant mode=755 recurse=yes state=directory
+#  when: stage in ['frontend-local', 'backend-local']
 
 - name: set php-fpm www.conf
   template: src=www.conf.j2 dest=/etc/php-fpm.d/www.conf owner=root group=root mode=0600

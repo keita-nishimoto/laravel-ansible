@@ -1,4 +1,6 @@
 document_root: /home/vagrant/laravel-api-sample/public
 domain_name: dev.laravel-api.net
+coverage_document_root: /usr/share/nginx/coverage
+coverage_domain_name: coverage.laravel-api.net
 ssl_certificate_path: /etc/pki/tls/certs/domainname.crt
 ssl_certificate_key_path: /etc/pki/tls/private/domainname.key
