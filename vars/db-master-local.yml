@@ -1,2 +1,7 @@
 # このパスワードはローカル開発環境でのみ有効です
 mysql_db_password: Laravel@RootPassword999@
+mysql_root_password: Laravel@RootPassword999@
+mysql_db_name: laravel_api
+mysql_db_user: laravel_api
+mysql_test_db_user: laravel_api_test
+mysql_test_db_name: laravel_api_test
