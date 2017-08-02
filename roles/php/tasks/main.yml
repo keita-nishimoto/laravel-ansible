@@ -1,5 +1,5 @@
-- name: install php7
-  yum : name={{item}} enablerepo=remi,remi-php70,epel state=present
+- name: install php7.1
+  yum : name={{item}} enablerepo=remi,remi-php71,epel state=present
   with_items:
     - php
     - php-devel
