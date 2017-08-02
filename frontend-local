@@ -1,5 +1,5 @@
 [frontend]
-192.168.33.20
+192.168.34.20
 
 [all:vars]
 stage=frontend-local
